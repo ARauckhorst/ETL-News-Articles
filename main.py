@@ -45,7 +45,7 @@ def main(file_path, base_url, max_pages):
     crawler = WebCrawler(base_url, max_pages)
     crawler.run_crawler()
     lock = multiprocessing.Lock()
-    func = partial(get_info, articles=articles, db=db, lock=lock)
+    func = partial(get_info, articles=articles)
     pool = ThreadPool(10)
     pool.map(func, crawler.links)
     pool.close()
