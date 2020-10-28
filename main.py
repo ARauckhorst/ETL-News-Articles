@@ -9,6 +9,11 @@ from functools import partial
 import time
 
 
+FILE_PATH = '<file path to SQLite>'
+BASE_URL = 'http://www.cnn.com'
+MAX_PAGES = 5000
+
+
 def get_info(url, articles, db, lock):
     sql = """INSERT INTO articles (url,authors,publish_date,scraped_date,top_image,article_text,xml) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?);"""
@@ -53,6 +58,6 @@ def main(file_path, base_url, max_pages):
 
 if __name__ == '__main__':
     start = time.time()
-    main('/Users/adamrauckhorst/Desktop/Web_Scraping_NLP/sqlite.db', 'http://www.cnn.com', 1000)
+    main(FILE_PATH, BASE_URL, MAX_PAGES)
     end = time.time()
     print(end - start)
