@@ -8,15 +8,13 @@ from multiprocessing.dummy import Pool as ThreadPool
 from functools import partial
 import time
 
-
 FILE_PATH = '<file path to SQLite>'
 BASE_URL = 'http://www.cnn.com'
 MAX_PAGES = 5000
 
 
-def get_info(url, articles, db, lock):
-    sql = """INSERT INTO articles (url,authors,publish_date,scraped_date,top_image,article_text,xml) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?);"""
+def get_info(url, articles):
+
     try:
         a = Article(url)
         a.download()
