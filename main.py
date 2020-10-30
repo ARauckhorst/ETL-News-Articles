@@ -4,7 +4,7 @@ from database import Database
 from crawler import WebCrawler
 from xml import generate_xml
 from newspaper import Article
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing import Pool
 from functools import partial
 import time
 
@@ -44,9 +44,8 @@ def main(file_path, base_url, max_pages):
                                         );""")
     crawler = WebCrawler(base_url, max_pages)
     crawler.run_crawler()
-    lock = multiprocessing.Lock()
     func = partial(get_info, articles=articles)
-    pool = ThreadPool(10)
+    pool = Pool(10)
     pool.map(func, crawler.links)
     pool.close()
     pool.join()
