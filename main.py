@@ -8,7 +8,6 @@ from newspaper import Article
 from multiprocessing import Pool
 from functools import partial
 
-FILE_PATH = '<file path to SQLite>'
 BASE_URL = 'http://www.cnn.com'
 MAX_PAGES = 5000
 
