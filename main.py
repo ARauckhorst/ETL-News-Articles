@@ -1,12 +1,12 @@
 import multiprocessing
 import datetime
+import os
 from database import Database
 from crawler import WebCrawler
 from xml import generate_xml
 from newspaper import Article
 from multiprocessing import Pool
 from functools import partial
-import time
 
 FILE_PATH = '<file path to SQLite>'
 BASE_URL = 'http://www.cnn.com'
@@ -27,11 +27,13 @@ def get_info(url, articles):
         print('Cannot download {}'.format(url))
 
 
-def main(file_path, base_url, max_pages):
+def main(base_url, max_pages):
     sql = """INSERT INTO articles (url,authors,publish_date,scraped_date,top_image,article_text,xml) 
                             VALUES (?, ?, ?, ?, ?, ?, ?);"""
     articles = []
-    db = Database(file_path)
+    path = os.getcwd() + '/SQLite/articles.db'
+    
+    db = Database(path)
     db.create_connection()
     db.create_table("""CREATE TABLE IF NOT EXISTS articles (
                                         url text PRIMARY KEY,
@@ -54,7 +56,5 @@ def main(file_path, base_url, max_pages):
 
 
 if __name__ == '__main__':
-    start = time.time()
-    main(FILE_PATH, BASE_URL, MAX_PAGES)
-    end = time.time()
-    print(end - start)
+    main(BASE_URL, MAX_PAGES)
+    
