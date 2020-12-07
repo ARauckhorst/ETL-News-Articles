@@ -7,7 +7,7 @@ An ETL pipeline to scrape information from news articles, transform the article 
 - crawler.py - Web crawler class built with BeautifulSoup
 - database.py - Database class for sqlite database connection
 - xml.py - Extract entities and dependancies from text using spaCy
-- main.py - Main script
+- main.py - Main script for crawling a news site, extracting text using Newspaper, and uploading to a SQLite database
 
 ### Contact Me
 
